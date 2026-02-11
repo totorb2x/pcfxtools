@@ -5,12 +5,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+      - name: Build All Tools
         run: |
-          gcc -o pcfx-cdlink.exe pcfx-cdlink/pcfx-cdlink.c -static
-          gcc -o pcfx-711.exe pcfx-711/pcfx-711.c -static
+          make
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: pcfx-tools
-          path: "*.exe"
+          name: pcfx-tools-windows
+          path: |
+            pcfx-cdlink/pcfx-cdlink.exe
+            pcfx-711/pcfx-711.exe
