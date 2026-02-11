@@ -1,0 +1,16 @@
+name: Build PCFX Tools for Windows
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build EXE
+        run: |
+          g++ -o pcfx-cdlink.exe pcfx-cdlink.c -static
+          g++ -o pcfx-711.exe pcfx-711.c -static
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: pcfx-tools-windows
+          path: "*.exe"
