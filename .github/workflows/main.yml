@@ -12,6 +12,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pcfx-tools-windows
-          path: |
-            pcfx-cdlink/pcfx-cdlink.exe
-            pcfx-711/pcfx-711.exe
+          path: "**/*.exe"
