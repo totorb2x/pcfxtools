@@ -1,15 +1,17 @@
-name: Build PCFX Tools Windows
+name: Build All PCFX Tools
 on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build All Tools
+      - name: Build Everything
         run: |
-          make
-      - name: Upload
+          make -C pcfx-cdlink
+          make -C pcfx-711
+          gcc -o pcfx-cdrd.exe pcfx-cdlink/pcfx-cdrd.c -static || echo "Pas de cdrd séparé"
+      - name: Upload All
         uses: actions/upload-artifact@v4
         with:
-          name: pcfx-tools-windows
+          name: pcfx-tools-complete
           path: "**/*.exe"
